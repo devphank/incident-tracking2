@@ -1,0 +1,55 @@
+/* General Styles */
+body {
+    background-color: #f8f9fa;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Card Styling */
+.card {
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    background: white;
+}
+
+/* Incident Entry */
+.incident-entry {
+    background: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 10px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Button Styling */
+button {
+    width: 100%;
+    margin-top: 10px;
+}
+
+/* Search Bar */
+#searchIncident {
+    border: 2px solid #ccc;
+    padding: 8px;
+}
+
+/* Filter Dropdown */
+#filterStatus {
+    border: 2px solid #ccc;
+    padding: 8px;
+}
+
+/* Error Handling */
+.error {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+}
