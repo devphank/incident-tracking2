@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Incident Tracking System</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="container">
+    <h2>Incident Status Tracking</h2>
+    
+    <label for="unit">ST/Unit:</label>
+    <input type="text" id="unit" placeholder="Enter Unit">
+    
+    <label for="name">Name:</label>
+    <input type="text" id="name" placeholder="First Last">
+    
+    <label for="position">Position/Title:</label>
+    <input type="text" id="position" placeholder="Section/Unit">
+    
+    <h3>Incident Entries</h3>
+    
+    <div id="incidentEntries">
+        <!-- Incident entries added dynamically -->
+    </div>
+    
+    <button type="button" onclick="addIncidentEntry()">Add Incident Entry</button>
+    <button type="button" onclick="submitForm()">Submit</button>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
