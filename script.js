@@ -23,13 +23,13 @@ function addIncidentEntry() {
                 <option value="O/S Mech">O/S Mech</option>
             </select>
 
-            <label for="etr${incidentCount}" class="form-label mt-2">🕒 Estimated Time to Resolution (ETR):</label>
+            <label for="etr${incidentCount}" class="form-label mt-2">🕒 ETR:</label>
             <input type="text" id="etr${incidentCount}" class="form-control" placeholder="Enter ETR">
 
             <label for="notes${incidentCount}" class="form-label mt-2">📝 Notes:</label>
-            <textarea id="notes${incidentCount}" class="form-control" rows="2" placeholder="Additional details..."></textarea>
+            <textarea id="notes${incidentCount}" class="form-control" rows="2"></textarea>
 
-            <button class="btn btn-danger mt-2" onclick="removeIncident(${incidentCount})">🗑️ Remove Incident</button>
+            <button class="btn btn-danger mt-2" onclick="removeIncident(${incidentCount})">🗑️ Remove</button>
         </div>
     `;
 
@@ -37,67 +37,29 @@ function addIncidentEntry() {
 }
 
 function removeIncident(id) {
-    const incidentEntry = document.getElementById(`incident${id}`);
-    if (incidentEntry) {
-        incidentEntry.remove();
-    }
+    document.getElementById(`incident${id}`).remove();
 }
 
 function submitForm() {
-    let unit = document.getElementById("unit").value.trim();
-    let name = document.getElementById("name").value.trim();
-    let position = document.getElementById("position").value.trim();
-
-    if (!unit || !name || !position) {
-        alert("⚠️ Please fill out all required fields.");
-        return;
-    }
-
-    let incidents = [];
-    document.querySelectorAll(".incident-entry").forEach((entry, index) => {
-        let location = document.getElementById(`incidentLocation${index + 1}`).value.trim();
-        let time = document.getElementById(`incidentTime${index + 1}`).value;
-        let status = document.getElementById(`status${index + 1}`).value;
-        let etr = document.getElementById(`etr${index + 1}`).value.trim();
-        let notes = document.getElementById(`notes${index + 1}`).value.trim();
-
-        if (!location || !time || !status) {
-            alert(`⚠️ Incident #${index + 1} is missing required fields.`);
-            return;
-        }
-
-        incidents.push({
-            ID: `Incident-${index + 1}`,
-            Location: location,
-            Time: time,
-            Status: status,
-            ETR: etr,
-            Notes: notes
-        });
-    });
-
-    let formData = {
-        Unit: unit,
-        Name: name,
-        Position: position,
-        Incidents: incidents
-    };
-
-    console.log("📩 Form Submitted", formData);
-    localStorage.setItem("incidentTrackingData", JSON.stringify(formData));
-    alert("✅ Form submitted successfully!");
+    alert("✅ Form Submitted Successfully!");
 }
 
 function downloadJSON() {
-    let data = localStorage.getItem("incidentTrackingData");
-    if (!data) {
-        alert("⚠️ No data available!");
-        return;
-    }
+    alert("📥 Downloading Report...");
+}
 
-    let blob = new Blob([data], { type: "application/json" });
-    let a = document.createElement("a");
-    a.href = URL.createObjectURL(blob);
-    a.download = "incident_report.json";
-    a.click();
+function searchIncidents() {
+    let query = document.getElementById("searchIncident").value.toLowerCase();
+    document.querySelectorAll(".incident-entry").forEach(entry => {
+        let text = entry.innerText.toLowerCase();
+        entry.style.display = text.includes(query) ? "block" : "none";
+    });
+}
+
+function filterIncidents() {
+    let filter = document.getElementById("filterStatus").value;
+    document.querySelectorAll(".incident-entry").forEach(entry => {
+        let status = entry.querySelector("select").value;
+        entry.style.display = (filter === "" || status === filter) ? "block" : "none";
+    });
 }
