@@ -5,7 +5,7 @@ function addIncidentEntry() {
     const container = document.getElementById("incidentEntries");
 
     const entryHTML = `
-        <div class="incident-entry card p-3 mt-3">
+        <div class="incident-entry card p-3 mt-3" id="incident${incidentCount}">
             <h5>🔹 Incident #${incidentCount}</h5>
             
             <label for="incidentLocation${incidentCount}" class="form-label">📍 Location:</label>
@@ -28,10 +28,19 @@ function addIncidentEntry() {
 
             <label for="notes${incidentCount}" class="form-label mt-2">📝 Notes:</label>
             <textarea id="notes${incidentCount}" class="form-control" rows="2" placeholder="Additional details..."></textarea>
+
+            <button class="btn btn-danger mt-2" onclick="removeIncident(${incidentCount})">🗑️ Remove Incident</button>
         </div>
     `;
 
     container.insertAdjacentHTML("beforeend", entryHTML);
+}
+
+function removeIncident(id) {
+    const incidentEntry = document.getElementById(`incident${id}`);
+    if (incidentEntry) {
+        incidentEntry.remove();
+    }
 }
 
 function submitForm() {
@@ -51,6 +60,11 @@ function submitForm() {
         let status = document.getElementById(`status${index + 1}`).value;
         let etr = document.getElementById(`etr${index + 1}`).value.trim();
         let notes = document.getElementById(`notes${index + 1}`).value.trim();
+
+        if (!location || !time || !status) {
+            alert(`⚠️ Incident #${index + 1} is missing required fields.`);
+            return;
+        }
 
         incidents.push({
             ID: `Incident-${index + 1}`,
